@@ -17,6 +17,7 @@ const MenuIcon = ({ className }) => (<svg className={className} xmlns="http://ww
 const BellIcon = ({ className }) => (<svg className={className} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" /></svg>);
 const PauseIcon = ({ className }) => (<svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" /></svg>);
 const PlayIcon = ({ className }) => (<svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z" /></svg>);
+const ExternalLinkIcon = ({ className }) => (<svg className={className} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-4.5 0V6.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v2.25m-7.5 0h7.5" /></svg>);
 
 // --- STYLES (TAILWIND & PRINT) ---
 const GlobalStyles = () => (
@@ -381,10 +382,16 @@ const Header = () => {
         setMobileMenuOpen(false);
     };
 
+    const AppTitle = () => (
+        <span className="font-bold text-gray-800 text-xs sm:text-sm lg:text-base">
+            Koha Kütüphane Otomasyon Sistemi Entegrasyonlu Yer Seçme, Rezervasyon ve Etkinlik Yönetimi Sistemi
+        </span>
+    );
+
     return (
         <header className="bg-white shadow-md sticky top-0 z-50 no-print">
             <nav className="mx-auto flex max-w-7xl items-center justify-between p-4 lg:px-8" aria-label="Global">
-                <div className="flex lg:flex-1"><a onClick={() => navigateTo('/rezervasyon/salonlar')} className="-m-1.5 p-1.5 cursor-pointer flex items-center"><span className="font-bold text-gray-800 text-base sm:text-lg">KYGM Rezervasyon</span></a></div>
+                <div className="flex lg:flex-1"><a onClick={() => navigateTo('/rezervasyon/salonlar')} className="-m-1.5 p-1.5 cursor-pointer flex items-center"><AppTitle /></a></div>
                 <div className="flex lg:hidden"><button type="button" className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700" onClick={() => setMobileMenuOpen(true)}><span className="sr-only">Menüyü aç</span><MenuIcon className="h-6 w-6" aria-hidden="true" /></button></div>
                 <div className="hidden lg:flex lg:items-center lg:gap-x-6">
                     <a onClick={() => navigateTo('/rezervasyon/salonlar')} className="text-sm font-semibold leading-6 text-gray-900 cursor-pointer hover:text-red-600">Yer Seçme</a>
@@ -393,6 +400,10 @@ const Header = () => {
                     {isAuthenticated && <a onClick={() => navigateTo('/rezervasyonlarim')} className="text-sm font-semibold leading-6 text-gray-900 cursor-pointer hover:text-red-600">Rezervasyonlarım/Taleplerim</a>}
                     {showBreakButton && <a onClick={openBreakModal} className="text-sm font-semibold leading-6 text-blue-600 cursor-pointer hover:text-blue-800 flex items-center gap-1"><PauseIcon className="w-4 h-4" /> Mola Yönetimi</a>}
                     
+                    <a href="https://kutuphaneveteknoloji.com/yersecmepanel.html" target="_blank" rel="noopener noreferrer" className="bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-semibold py-2 px-4 rounded-lg flex items-center gap-2 transition-colors">
+                        Yönetim Paneli <ExternalLinkIcon className="w-4 h-4" />
+                    </a>
+
                     {isAuthenticated ? (
                         <div className="flex items-center gap-x-4">
                              <div className="relative">
@@ -417,13 +428,14 @@ const Header = () => {
             <div className={`lg:hidden ${mobileMenuOpen ? 'block' : 'hidden'}`} role="dialog" aria-modal="true">
                 <div className="fixed inset-0 z-50" />
                 <div className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
-                    <div className="flex items-center justify-between"><a onClick={() => navigateTo('/rezervasyon/salonlar')} className="-m-1.5 p-1.5 cursor-pointer flex items-center"><span className="font-bold text-gray-800 text-base">KYGM Rezervasyon</span></a><button type="button" className="-m-2.5 rounded-md p-2.5 text-gray-700" onClick={() => setMobileMenuOpen(false)}><span className="sr-only">Menüyü kapat</span><XMarkIcon className="h-6 w-6" aria-hidden="true" /></button></div>
+                    <div className="flex items-center justify-between"><a onClick={() => navigateTo('/rezervasyon/salonlar')} className="-m-1.5 p-1.5 cursor-pointer flex items-center"><AppTitle /></a><button type="button" className="-m-2.5 rounded-md p-2.5 text-gray-700" onClick={() => setMobileMenuOpen(false)}><span className="sr-only">Menüyü kapat</span><XMarkIcon className="h-6 w-6" aria-hidden="true" /></button></div>
                     <div className="mt-6 flow-root"><div className="-my-6 divide-y divide-gray-500/10"><div className="space-y-2 py-6">
                         <a onClick={() => navigateTo('/rezervasyon/salonlar')} className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 cursor-pointer">Yer Seçme</a>
                         <a onClick={() => navigateTo('/grup-rezervasyon')} className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 cursor-pointer">Grup Odası Rezervasyonu</a>
                         <a onClick={() => navigateTo('/etkinlikler')} className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 cursor-pointer">Etkinlik Rezervasyonu</a>
                         {isAuthenticated && <a onClick={() => navigateTo('/rezervasyonlarim')} className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 cursor-pointer">Rezervasyonlarım/Taleplerim</a>}
                         {showBreakButton && <a onClick={handleOpenBreakModal} className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-blue-600 hover:bg-blue-50 cursor-pointer">Mola Yönetimi</a>}
+                        <a href="https://kutuphaneveteknoloji.com/yersecmepanel.html" target="_blank" rel="noopener noreferrer" className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 cursor-pointer">Yönetim Paneli</a>
                     </div><div className="py-6">
                         {isAuthenticated ? (
                              <div className="mb-4">
