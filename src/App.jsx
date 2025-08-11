@@ -222,7 +222,7 @@ export const ReservationProvider = ({ children }) => {
     const [groupReservation, setGroupReservation] = useState(null);
     const [notificationRequest, setNotificationRequest] = useState(null);
     const [appNotification, setAppNotification] = useState(null);
-    const [breakInfo, setBreakInfo] = useState({ isOnBreak: false, endTime: null, availableBreaks: { short: 3, long: 1 } });
+    const [breakInfo, setBreakInfo] = useState({ isOnBreak: false, startTime: null, endTime: null, availableBreaks: { short: 3, long: 1 } });
     const breakTimers = useRef({ reminder: null, cancellation: null });
     const { user, isAuthenticated } = useAuth();
 
@@ -248,7 +248,7 @@ export const ReservationProvider = ({ children }) => {
         if (result.success) {
             setSeatReservation(null);
             clearBreakTimers();
-            setBreakInfo(prev => ({ ...prev, isOnBreak: false, endTime: null }));
+            setBreakInfo(prev => ({ ...prev, isOnBreak: false, startTime: null, endTime: null }));
             if (reason === 'break_exceeded') {
                  setAppNotification({ type: 'error', message: 'Mola süresi aşıldığı için rezervasyonunuz iptal edildi.' });
             } else if (result.notificationSent) {
@@ -262,8 +262,14 @@ export const ReservationProvider = ({ children }) => {
         const gracePeriod = 3 * 60 * 1000;
         const reminderTime = 3 * 60 * 1000;
         const durationMs = duration * 60 * 1000;
-        const endTime = new Date(Date.now() + durationMs);
-        setBreakInfo(prev => ({ isOnBreak: true, endTime, availableBreaks: { ...prev.availableBreaks, [type]: prev.availableBreaks[type] - 1 } }));
+        const startTime = new Date();
+        const endTime = new Date(startTime.getTime() + durationMs);
+        setBreakInfo(prev => ({ 
+            isOnBreak: true, 
+            startTime: startTime.toISOString(), 
+            endTime, 
+            availableBreaks: { ...prev.availableBreaks, [type]: prev.availableBreaks[type] - 1 } 
+        }));
         breakTimers.current.reminder = setTimeout(() => { setAppNotification({ type: 'info', message: 'Mola sürenizin dolmasına 3 dakika kaldı!' }); }, durationMs - reminderTime);
         breakTimers.current.cancellation = setTimeout(() => { cancelMySeatReservation('break_exceeded'); }, durationMs + gracePeriod);
         setAppNotification({ type: 'success', message: `${duration} dakikalık molanız başladı.` });
@@ -271,7 +277,7 @@ export const ReservationProvider = ({ children }) => {
 
     const endBreak = () => {
         clearBreakTimers();
-        setBreakInfo(prev => ({ ...prev, isOnBreak: false, endTime: null }));
+        setBreakInfo(prev => ({ ...prev, isOnBreak: false, startTime: null, endTime: null }));
         setAppNotification({ type: 'success', message: 'Tekrar hoş geldiniz! Oturumunuz aktif hale getirildi.' });
     };
 
@@ -543,7 +549,8 @@ const Seat = ({ seat, isSelected }) => {
     return (<div className={`rounded-lg p-2 flex flex-col items-center justify-center transition-all duration-300 w-24 h-24 text-center ${statusClasses[currentStatus]}`}><SeatIcon className="w-8 h-8 mb-1" /><span className="font-bold text-sm">{seat.id}</span><span className="text-xs capitalize">{currentStatus === 'available' ? 'Boş' : (currentStatus === 'occupied' ? 'Dolu' : (currentStatus === 'selected' ? 'Seçildi' : 'Servis Dışı'))}</span></div>);
 };
 const BreakManagementModal = ({ isOpen, onClose }) => {
-    const { breakInfo, startBreak, endBreak } = useReservation();
+    const { breakInfo, startBreak, endBreak, seatReservation } = useReservation();
+    const { user } = useAuth();
     const [timeLeft, setTimeLeft] = useState(0);
 
     useEffect(() => {
@@ -570,8 +577,26 @@ const BreakManagementModal = ({ isOpen, onClose }) => {
     
     const handleStartBreak = (duration, type) => {
         startBreak(duration, type);
-        onClose();
     };
+
+    let breakQrUrl = null;
+    if (breakInfo.isOnBreak && user && seatReservation && breakInfo.endTime) {
+        const now = Math.floor(Date.now() / 1000);
+        const payload = {
+            jti: `jwt-break-${seatReservation.id}-${now}`,
+            iat: now,
+            exp: Math.floor(new Date(breakInfo.endTime).getTime() / 1000) + 180, // end time + 3 min grace
+            sub: user.id,
+            typ: 'break_session',
+            resId: seatReservation.id,
+            sId: seatReservation.seatId,
+            hId: seatReservation.hallId,
+            breakStart: breakInfo.startTime,
+            breakEnd: breakInfo.endTime.toISOString(),
+        };
+        const token = createSecureQrToken(payload);
+        breakQrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(token)}`;
+    }
 
     return (
         <Modal isOpen={isOpen} onClose={onClose} title="Mola Yönetimi">
@@ -581,6 +606,15 @@ const BreakManagementModal = ({ isOpen, onClose }) => {
                     <div className="my-4 text-6xl font-bold text-red-600 font-mono">
                         {formatTime(timeLeft)}
                     </div>
+
+                    {breakQrUrl && (
+                        <div className="my-6 p-4 bg-gray-50 rounded-lg border">
+                            <h4 className="font-semibold text-gray-700 mb-2">Mola Geçiş Kodu</h4>
+                            <p className="text-xs text-gray-500 mb-3">Çıkış ve girişlerde turnikelerde veya personele okutmak için bu QR kodu kullanın.</p>
+                            <img src={breakQrUrl} crossOrigin="anonymous" alt="Mola QR Kodu" className="mx-auto rounded-lg shadow-md" />
+                        </div>
+                    )}
+
                     <p className="text-sm text-gray-500 mb-6">Mola süreniz bittiğinde yerinizi kaybetmemek için 3 dakikalık ek süreniz bulunmaktadır.</p>
                     <Button onClick={() => { endBreak(); onClose(); }} variant="secondary">
                         <PlayIcon className="w-5 h-5 mr-2" /> Giriş Yaptım / Molayı Bitir
