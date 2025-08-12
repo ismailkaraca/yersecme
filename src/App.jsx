@@ -12,11 +12,15 @@ const UsersIcon = ({ className }) => (<svg className={className} xmlns="http://w
 const TrashIcon = ({ className }) => (<svg className={className} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.134-2.09-2.134H8.09a2.09 2.09 0 00-2.09 2.134v.916m7.5 0a48.667 48.667 0 00-7.5 0" /></svg>);
 const ChevronLeftIcon = ({ className }) => (<svg className={className} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" /></svg>);
 const ChevronRightIcon = ({ className }) => (<svg className={className} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>);
+const ChevronDownIcon = ({ className }) => (<svg className={className} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>);
 const XMarkIcon = ({ className }) => (<svg className={className} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>);
 const MenuIcon = ({ className }) => (<svg className={className} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /></svg>);
 const BellIcon = ({ className }) => (<svg className={className} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" /></svg>);
 const PauseIcon = ({ className }) => (<svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" /></svg>);
 const PlayIcon = ({ className }) => (<svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z" /></svg>);
+const ExternalLinkIcon = ({ className }) => (<svg className={className} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-4.5 0V6.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v2.25m-7.5 0h7.5" /></svg>);
+const TagIcon = ({ className }) => (<svg className={className} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L9.568 3z" /><path strokeLinecap="round" strokeLinejoin="round" d="M6 6h.008v.008H6V6z" /></svg>);
+
 
 // --- STYLES (TAILWIND & PRINT) ---
 const GlobalStyles = () => (
@@ -39,6 +43,8 @@ const GlobalStyles = () => (
 // --- MOCK API & DATA ---
 const MOCK_USERS = [
   { id: '11111111111', password: '123456', name: 'Ayşe Yılmaz', role: 'Üye', email: 'ayse.yilmaz@example.com' },
+  { id: '22222222222', password: '123456', name: 'Mehmet Öztürk', role: 'Üye', email: 'mehmet.ozturk@example.com' },
+  { id: '33333333333', password: '123456', name: 'Fatma Kaya', role: 'Üye', email: 'fatma.kaya@example.com' },
 ];
 const MOCK_HALLS_DATA = [
     { id: 'hall-1', name: 'Genel Çalışma Salonu', capacity: 8, rating: 4.8, avgStay: '2s 15dk', features: ['Priz Mevcut', 'Wi-Fi', 'Grup Çalışması'] },
@@ -78,7 +84,7 @@ const kohaService = {
       setTimeout(() => {
           const userRecord = MOCK_USERS.find(u => u.id === tc);
           if (userRecord) {
-              resolve({ success: true, userExists: true });
+              resolve({ success: true, userExists: true, user: userRecord });
           } else {
               resolve({ success: true, userExists: false });
           }
@@ -146,7 +152,12 @@ const kohaService = {
           const event = MOCK_EVENTS_DATA.find(e => e.id === eventId);
           if (event.registered + participants.length > event.capacity) { resolve({ success: false, message: 'Yeterli kontenjan bulunmamaktadır.' }); return; }
           event.registered += participants.length;
-          const newEventReservation = { type: 'event', id: `evt-res-${Date.now()}`, eventId, userId, eventName: event.name, eventDate: event.date, eventLocation: event.location, reservationTime: new Date().toISOString(), participants };
+          const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+          let code = '';
+          for (let i = 0; i < 3; i++) code += chars.charAt(Math.floor(Math.random() * chars.length));
+          code += '-';
+          for (let i = 0; i < 4; i++) code += chars.charAt(Math.floor(Math.random() * chars.length));
+          const newEventReservation = { type: 'event', id: `evt-res-${Date.now()}`, eventId, userId, eventName: event.name, eventDate: event.date, eventLocation: event.location, reservationTime: new Date().toISOString(), participants, reservationCode: code, status: 'confirmed' };
           MOCK_EVENT_RESERVATIONS.push(newEventReservation);
           resolve({ success: true, reservation: newEventReservation });
       }, 1000);
@@ -187,11 +198,59 @@ const kohaService = {
   }),
 };
 
-// --- SECURITY UTILITIES (JWT Simulation for QR Codes) ---
+// --- SECURITY & UTILITIES ---
 const JWT_SECRET = 'kygm-koha-cok-gizli-anahtar-12345!';
 const base64url = (source) => { let encodedSource = btoa(JSON.stringify(source)); encodedSource = encodedSource.replace(/=+$/, ''); encodedSource = encodedSource.replace(/\+/g, '-'); encodedSource = encodedSource.replace(/\//g, '_'); return encodedSource; };
 const createSignature = (data) => { let hash = 0; const combined = data + JWT_SECRET; for (let i = 0; i < combined.length; i++) { const char = combined.charCodeAt(i); hash = ((hash << 5) - hash) + char; hash |= 0; } return btoa(hash.toString()).replace(/=/g, '').replace(/\+/g, '-').replace(/\//g, '_'); };
 const createSecureQrToken = (payload) => { const header = { alg: 'HS256-SIMULATED', typ: 'JWT' }; const encodedHeader = base64url(header); const encodedPayload = base64url(payload); const unsignedToken = `${encodedHeader}.${encodedPayload}`; const signature = createSignature(unsignedToken); return `${unsignedToken}.${signature}`; };
+const takeScreenshot = (elementId, filename) => {
+    const element = document.getElementById(elementId);
+    if (element && window.html2canvas) {
+        window.html2canvas(element, { useCORS: true }).then(canvas => { const link = document.createElement('a'); link.download = filename; link.href = canvas.toDataURL('image/png'); link.click(); });
+    } else { console.error("html2canvas library not found or element not found"); }
+};
+const maskName = (name) => {
+    if (!name) return '';
+    const parts = name.trim().split(' ');
+    if (parts.length > 1) {
+        const firstName = parts[0];
+        const lastName = parts[parts.length - 1];
+        return `${firstName.charAt(0)}**** ${lastName.charAt(0)}*****`;
+    }
+    return `${name.charAt(0)}**********`;
+};
+const generateIcsFile = (event) => {
+    const formatDate = (date) => { return new Date(date).toISOString().replace(/-|:|\.\d\d\d/g, ""); };
+    const icsContent = [
+        'BEGIN:VCALENDAR',
+        'VERSION:2.0',
+        'PRODID:-//ismailkaraca.com.tr//KYGM Reservation System//TR',
+        'BEGIN:VEVENT',
+        `UID:${event.id}@kygm.gov.tr`,
+        `DTSTAMP:${formatDate(new Date())}`,
+        `DTSTART:${formatDate(event.date)}`,
+        `DTEND:${formatDate(new Date(new Date(event.date).getTime() + 2 * 60 * 60 * 1000))}`, // Assuming 2 hours duration
+        `SUMMARY:${event.name}`,
+        `DESCRIPTION:${event.description}`,
+        `LOCATION:${event.location}`,
+        'END:VEVENT',
+        'END:VCALENDAR'
+    ].join('\n');
+    return new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+};
+const getCalendarLinks = (event) => {
+    const title = encodeURIComponent(event.name);
+    const description = encodeURIComponent(event.description);
+    const location = encodeURIComponent(event.location);
+    const startTime = new Date(event.date).toISOString().replace(/-|:|\.\d\d\d/g, "");
+    const endTime = new Date(new Date(event.date).getTime() + 2 * 60 * 60 * 1000).toISOString().replace(/-|:|\.\d\d\d/g, "");
+
+    const google = `https://www.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${startTime}/${endTime}&details=${description}&location=${location}`;
+    const yahoo = `http://calendar.yahoo.com/?v=60&view=d&type=20&title=${title}&st=${startTime}&et=${endTime}&desc=${description}&in_loc=${location}`;
+    const outlook = `https://outlook.live.com/calendar/0/deeplink/compose?path=/calendar/action/compose&rru=addevent&subject=${title}&startdt=${startTime}&enddt=${endTime}&body=${description}&location=${location}`;
+    
+    return { google, yahoo, outlook };
+};
 
 // --- CONTEXTS ---
 const AuthContext = createContext(null);
@@ -222,7 +281,7 @@ export const ReservationProvider = ({ children }) => {
     const [groupReservation, setGroupReservation] = useState(null);
     const [notificationRequest, setNotificationRequest] = useState(null);
     const [appNotification, setAppNotification] = useState(null);
-    const [breakInfo, setBreakInfo] = useState({ isOnBreak: false, endTime: null, availableBreaks: { short: 3, long: 1 } });
+    const [breakInfo, setBreakInfo] = useState({ isOnBreak: false, startTime: null, endTime: null, availableBreaks: { short: 3, long: 1 } });
     const breakTimers = useRef({ reminder: null, cancellation: null });
     const { user, isAuthenticated } = useAuth();
 
@@ -248,7 +307,7 @@ export const ReservationProvider = ({ children }) => {
         if (result.success) {
             setSeatReservation(null);
             clearBreakTimers();
-            setBreakInfo(prev => ({ ...prev, isOnBreak: false, endTime: null }));
+            setBreakInfo(prev => ({ ...prev, isOnBreak: false, startTime: null, endTime: null }));
             if (reason === 'break_exceeded') {
                  setAppNotification({ type: 'error', message: 'Mola süresi aşıldığı için rezervasyonunuz iptal edildi.' });
             } else if (result.notificationSent) {
@@ -262,8 +321,14 @@ export const ReservationProvider = ({ children }) => {
         const gracePeriod = 3 * 60 * 1000;
         const reminderTime = 3 * 60 * 1000;
         const durationMs = duration * 60 * 1000;
-        const endTime = new Date(Date.now() + durationMs);
-        setBreakInfo(prev => ({ isOnBreak: true, endTime, availableBreaks: { ...prev.availableBreaks, [type]: prev.availableBreaks[type] - 1 } }));
+        const startTime = new Date();
+        const endTime = new Date(startTime.getTime() + durationMs);
+        setBreakInfo(prev => ({ 
+            isOnBreak: true, 
+            startTime: startTime.toISOString(), 
+            endTime, 
+            availableBreaks: { ...prev.availableBreaks, [type]: prev.availableBreaks[type] - 1 } 
+        }));
         breakTimers.current.reminder = setTimeout(() => { setAppNotification({ type: 'info', message: 'Mola sürenizin dolmasına 3 dakika kaldı!' }); }, durationMs - reminderTime);
         breakTimers.current.cancellation = setTimeout(() => { cancelMySeatReservation('break_exceeded'); }, durationMs + gracePeriod);
         setAppNotification({ type: 'success', message: `${duration} dakikalık molanız başladı.` });
@@ -271,7 +336,7 @@ export const ReservationProvider = ({ children }) => {
 
     const endBreak = () => {
         clearBreakTimers();
-        setBreakInfo(prev => ({ ...prev, isOnBreak: false, endTime: null }));
+        setBreakInfo(prev => ({ ...prev, isOnBreak: false, startTime: null, endTime: null }));
         setAppNotification({ type: 'success', message: 'Tekrar hoş geldiniz! Oturumunuz aktif hale getirildi.' });
     };
 
@@ -296,24 +361,28 @@ export const useBreakModal = () => useContext(BreakModalContext);
 
 // --- ROUTING ---
 const RouterContext = createContext({});
-const Route = ({ path, component, exact = false }) => { const { currentPath } = useContext(RouterContext); const match = exact ? currentPath === path : currentPath.startsWith(path); return match ? component : null; };
+const Route = ({ path, component, exact = false }) => {
+    const { currentPath } = useContext(RouterContext);
+    // BUG FIX: Ignore query string for path matching to allow `exact` to work with query params.
+    const pathWithoutQuery = currentPath.split('?')[0];
+    const match = exact ? pathWithoutQuery === path : pathWithoutQuery.startsWith(path);
+    return match ? component : null;
+};
 const useHistory = () => { const { setCurrentPath } = useContext(RouterContext); return { push: (path) => setCurrentPath(path) }; };
 const useParams = () => {
     const { currentPath } = useContext(RouterContext);
-    const parts = currentPath.split('/');
+    const pathWithoutQuery = currentPath.split('?')[0];
+    const parts = pathWithoutQuery.split('/');
     if (parts[1] === 'rezervasyon' && parts[2] === 'salonlar' && parts.length > 3) { return { hallId: parts[3] }; }
     if (parts[1] === 'etkinlikler' && parts.length > 2) { return { eventId: parts[2] }; }
     return {};
 };
-
-// --- UTILITIES ---
-const takeScreenshot = (elementId, filename) => {
-    const element = document.getElementById(elementId);
-    if (element && window.html2canvas) {
-        window.html2canvas(element, { useCORS: true }).then(canvas => { const link = document.createElement('a'); link.download = filename; link.href = canvas.toDataURL('image/png'); link.click(); });
-    } else { console.error("html2canvas library not found or element not found"); }
+const useQuery = () => {
+    const { currentPath } = useContext(RouterContext);
+    const queryString = currentPath.split('?')[1];
+    if (!queryString) return new URLSearchParams();
+    return new URLSearchParams(queryString);
 };
-
 
 // --- UI COMPONENTS ---
 const Button = ({ children, onClick, type = 'button', variant = 'primary', className = '', isLoading = false, disabled = false }) => { const baseClasses = 'w-full flex justify-center items-center rounded-lg px-4 py-2.5 text-sm font-semibold shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed'; const variantClasses = { primary: 'bg-main-red text-white hover:bg-red-700 focus-visible:outline-red-600', secondary: 'bg-white text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50', danger: 'bg-red-600 text-white hover:bg-red-700 focus-visible:outline-red-800' }; return <button type={type} onClick={onClick} className={`${baseClasses} ${variantClasses[variant]} ${className}`} disabled={isLoading || disabled}>{isLoading ? <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div> : children}</button>;};
@@ -375,10 +444,16 @@ const Header = () => {
         setMobileMenuOpen(false);
     };
 
+    const AppTitle = () => (
+        <span className="font-bold text-gray-800 text-xs sm:text-sm lg:text-base">
+            Koha Kütüphane Otomasyon Sistemi Entegrasyonlu Yer Seçme, Rezervasyon ve Etkinlik Yönetimi Sistemi
+        </span>
+    );
+
     return (
         <header className="bg-white shadow-md sticky top-0 z-50 no-print">
             <nav className="mx-auto flex max-w-7xl items-center justify-between p-4 lg:px-8" aria-label="Global">
-                <div className="flex lg:flex-1"><a onClick={() => navigateTo('/rezervasyon/salonlar')} className="-m-1.5 p-1.5 cursor-pointer flex items-center"><span className="font-bold text-gray-800 text-base sm:text-lg">KYGM Rezervasyon</span></a></div>
+                <div className="flex lg:flex-1"><a onClick={() => navigateTo('/rezervasyon/salonlar')} className="-m-1.5 p-1.5 cursor-pointer flex items-center"><AppTitle /></a></div>
                 <div className="flex lg:hidden"><button type="button" className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700" onClick={() => setMobileMenuOpen(true)}><span className="sr-only">Menüyü aç</span><MenuIcon className="h-6 w-6" aria-hidden="true" /></button></div>
                 <div className="hidden lg:flex lg:items-center lg:gap-x-6">
                     <a onClick={() => navigateTo('/rezervasyon/salonlar')} className="text-sm font-semibold leading-6 text-gray-900 cursor-pointer hover:text-red-600">Yer Seçme</a>
@@ -387,6 +462,10 @@ const Header = () => {
                     {isAuthenticated && <a onClick={() => navigateTo('/rezervasyonlarim')} className="text-sm font-semibold leading-6 text-gray-900 cursor-pointer hover:text-red-600">Rezervasyonlarım/Taleplerim</a>}
                     {showBreakButton && <a onClick={openBreakModal} className="text-sm font-semibold leading-6 text-blue-600 cursor-pointer hover:text-blue-800 flex items-center gap-1"><PauseIcon className="w-4 h-4" /> Mola Yönetimi</a>}
                     
+                    <a href="https://kutuphaneveteknoloji.com/yersecmepanel.html" target="_blank" rel="noopener noreferrer" className="bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-semibold py-2 px-4 rounded-lg flex items-center gap-2 transition-colors">
+                        Yönetim Paneli <ExternalLinkIcon className="w-4 h-4" />
+                    </a>
+
                     {isAuthenticated ? (
                         <div className="flex items-center gap-x-4">
                              <div className="relative">
@@ -411,13 +490,14 @@ const Header = () => {
             <div className={`lg:hidden ${mobileMenuOpen ? 'block' : 'hidden'}`} role="dialog" aria-modal="true">
                 <div className="fixed inset-0 z-50" />
                 <div className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
-                    <div className="flex items-center justify-between"><a onClick={() => navigateTo('/rezervasyon/salonlar')} className="-m-1.5 p-1.5 cursor-pointer flex items-center"><span className="font-bold text-gray-800 text-base">KYGM Rezervasyon</span></a><button type="button" className="-m-2.5 rounded-md p-2.5 text-gray-700" onClick={() => setMobileMenuOpen(false)}><span className="sr-only">Menüyü kapat</span><XMarkIcon className="h-6 w-6" aria-hidden="true" /></button></div>
+                    <div className="flex items-center justify-between"><a onClick={() => navigateTo('/rezervasyon/salonlar')} className="-m-1.5 p-1.5 cursor-pointer flex items-center"><AppTitle /></a><button type="button" className="-m-2.5 rounded-md p-2.5 text-gray-700" onClick={() => setMobileMenuOpen(false)}><span className="sr-only">Menüyü kapat</span><XMarkIcon className="h-6 w-6" aria-hidden="true" /></button></div>
                     <div className="mt-6 flow-root"><div className="-my-6 divide-y divide-gray-500/10"><div className="space-y-2 py-6">
                         <a onClick={() => navigateTo('/rezervasyon/salonlar')} className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 cursor-pointer">Yer Seçme</a>
                         <a onClick={() => navigateTo('/grup-rezervasyon')} className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 cursor-pointer">Grup Odası Rezervasyonu</a>
                         <a onClick={() => navigateTo('/etkinlikler')} className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 cursor-pointer">Etkinlik Rezervasyonu</a>
                         {isAuthenticated && <a onClick={() => navigateTo('/rezervasyonlarim')} className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 cursor-pointer">Rezervasyonlarım/Taleplerim</a>}
                         {showBreakButton && <a onClick={handleOpenBreakModal} className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-blue-600 hover:bg-blue-50 cursor-pointer">Mola Yönetimi</a>}
+                        <a href="https://kutuphaneveteknoloji.com/yersecmepanel.html" target="_blank" rel="noopener noreferrer" className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 cursor-pointer">Yönetim Paneli</a>
                     </div><div className="py-6">
                         {isAuthenticated ? (
                              <div className="mb-4">
@@ -426,7 +506,7 @@ const Header = () => {
                                 <a onClick={handleLogout} className="mt-2 inline-block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-red-600 hover:bg-gray-50 cursor-pointer w-full text-center ring-1 ring-inset ring-red-200">Çıkış Yap</a>
                              </div>
                         ) : (
-                            <a onClick={() => { openAuthModal(); }} className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 cursor-pointer">Giriş Yap</a>
+                            <a onClick={() => { closeAuthModal(); openAuthModal(); }} className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 cursor-pointer">Giriş Yap</a>
                         )}
                     </div></div></div>
                 </div>
@@ -478,6 +558,8 @@ const EventTicketView = ({ reservation, user, onSendSms, onPrint, onScreenshot, 
     const payload = { jti: `jwt-${reservation.id}-${now}`, iat: now, exp: now + 3600, sub: user.id, typ: 'event', resId: reservation.id, eId: reservation.eventId, pax: reservation.participants.length, };
     const token = createSecureQrToken(payload);
     const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(token)}`;
+    const event = MOCK_EVENTS_DATA.find(e => e.id === reservation.eventId);
+
     return (
         <div>
              <div id={ticketId} className="printable-area bg-white p-4 rounded-lg">
@@ -485,14 +567,23 @@ const EventTicketView = ({ reservation, user, onSendSms, onPrint, onScreenshot, 
                     <h3 className="text-xl font-bold text-green-600">Etkinlik Kaydı Başarılı!</h3>
                     <div className="text-center my-4"><img src={qrUrl} crossOrigin="anonymous" alt="Güvenli Etkinlik QR Kodu" className="mx-auto rounded-lg shadow-md" /></div>
                     <div className="text-left bg-gray-50 p-4 rounded-lg">
-                        <div className="border-b pb-3 mb-3"><p className="text-sm text-gray-500">Üye Adı Soyadı</p><p className="text-lg font-bold text-gray-800">{user.name}</p><p className="text-sm text-gray-500 mt-2">Üye ID</p><p className="font-mono text-gray-700">{user.id}</p></div>
                         <div className="mb-3"><p className="text-sm text-gray-500">Etkinlik</p><p className="text-lg font-bold text-gray-800">{reservation.eventName}</p></div>
                         <div className="flex justify-between items-center mb-3"><div><p className="text-sm text-gray-500">Tarih</p><p className="font-semibold text-gray-700">{new Date(reservation.eventDate).toLocaleDateString('tr-TR')}</p></div><div><p className="text-sm text-gray-500 text-right">Konum</p><p className="font-semibold text-gray-700">{reservation.eventLocation}</p></div></div>
-                        <div className="border-t pt-3"><p className="text-sm text-gray-500">Kayıt Zamanı</p><p className="font-semibold text-gray-700">{new Date(reservation.reservationTime).toLocaleString('tr-TR')}</p></div>
+                        <div className="border-t pt-3 mb-3"><p className="text-sm text-gray-500">Katılımcılar ({reservation.participants.length} kişi)</p><ul className="text-sm font-semibold text-gray-700">{reservation.participants.map(p => <li key={p.tc}>{maskName(p.name)}</li>)}</ul></div>
+                        <div className="border-t pt-3"><p className="text-sm text-gray-500">Rezervasyon Kodu</p><p className="font-mono text-lg font-bold text-gray-800">{reservation.reservationCode}</p></div>
                     </div>
                 </div>
             </div>
-            {showButtons && (<div className="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-2 no-print"><Button onClick={onSendSms} disabled={smsSent} className="text-xs">SMS Gönder</Button><Button onClick={onPrint} variant="secondary" className="text-xs">Yazdır</Button><Button onClick={() => onScreenshot(ticketId, 'etkinlik-bileti.png')} variant="secondary" className="text-xs">Ekran Görüntüsü Al / İndir</Button></div>)}
+            {showButtons && (
+                <div className="mt-4 grid grid-cols-1 gap-2 no-print">
+                    {event && <CalendarExport event={event} />}
+                    <div className="grid grid-cols-3 gap-2 mt-2">
+                        <Button onClick={onSendSms} disabled={smsSent} className="text-xs">SMS Gönder</Button>
+                        <Button onClick={onPrint} variant="secondary" className="text-xs">Yazdır</Button>
+                        <Button onClick={() => onScreenshot(ticketId, 'etkinlik-bileti.png')} variant="secondary" className="text-xs">İndir</Button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
@@ -543,7 +634,8 @@ const Seat = ({ seat, isSelected }) => {
     return (<div className={`rounded-lg p-2 flex flex-col items-center justify-center transition-all duration-300 w-24 h-24 text-center ${statusClasses[currentStatus]}`}><SeatIcon className="w-8 h-8 mb-1" /><span className="font-bold text-sm">{seat.id}</span><span className="text-xs capitalize">{currentStatus === 'available' ? 'Boş' : (currentStatus === 'occupied' ? 'Dolu' : (currentStatus === 'selected' ? 'Seçildi' : 'Servis Dışı'))}</span></div>);
 };
 const BreakManagementModal = ({ isOpen, onClose }) => {
-    const { breakInfo, startBreak, endBreak } = useReservation();
+    const { breakInfo, startBreak, endBreak, seatReservation } = useReservation();
+    const { user } = useAuth();
     const [timeLeft, setTimeLeft] = useState(0);
 
     useEffect(() => {
@@ -570,8 +662,26 @@ const BreakManagementModal = ({ isOpen, onClose }) => {
     
     const handleStartBreak = (duration, type) => {
         startBreak(duration, type);
-        onClose();
     };
+
+    let breakQrUrl = null;
+    if (breakInfo.isOnBreak && user && seatReservation && breakInfo.endTime) {
+        const now = Math.floor(Date.now() / 1000);
+        const payload = {
+            jti: `jwt-break-${seatReservation.id}-${now}`,
+            iat: now,
+            exp: Math.floor(new Date(breakInfo.endTime).getTime() / 1000) + 180, // end time + 3 min grace
+            sub: user.id,
+            typ: 'break_session',
+            resId: seatReservation.id,
+            sId: seatReservation.seatId,
+            hId: seatReservation.hallId,
+            breakStart: breakInfo.startTime,
+            breakEnd: breakInfo.endTime.toISOString(),
+        };
+        const token = createSecureQrToken(payload);
+        breakQrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(token)}`;
+    }
 
     return (
         <Modal isOpen={isOpen} onClose={onClose} title="Mola Yönetimi">
@@ -581,6 +691,15 @@ const BreakManagementModal = ({ isOpen, onClose }) => {
                     <div className="my-4 text-6xl font-bold text-red-600 font-mono">
                         {formatTime(timeLeft)}
                     </div>
+
+                    {breakQrUrl && (
+                        <div className="my-6 p-4 bg-gray-50 rounded-lg border">
+                            <h4 className="font-semibold text-gray-700 mb-2">Mola Geçiş Kodu</h4>
+                            <p className="text-xs text-gray-500 mb-3">Çıkış ve girişlerde turnikelerde veya personele okutmak için bu QR kodu kullanın.</p>
+                            <img src={breakQrUrl} crossOrigin="anonymous" alt="Mola QR Kodu" className="mx-auto rounded-lg shadow-md" />
+                        </div>
+                    )}
+
                     <p className="text-sm text-gray-500 mb-6">Mola süreniz bittiğinde yerinizi kaybetmemek için 3 dakikalık ek süreniz bulunmaktadır.</p>
                     <Button onClick={() => { endBreak(); onClose(); }} variant="secondary">
                         <PlayIcon className="w-5 h-5 mr-2" /> Giriş Yaptım / Molayı Bitir
@@ -620,6 +739,43 @@ const BreakManagementModal = ({ isOpen, onClose }) => {
                 </div>
             )}
         </Modal>
+    );
+};
+const CalendarExport = ({ event }) => {
+    const links = getCalendarLinks(event);
+    const handleDownloadIcs = () => {
+        const icsBlob = generateIcsFile(event);
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(icsBlob);
+        link.download = `${event.name}.ics`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    };
+
+    return (
+        <div className="p-4 bg-gray-50 rounded-lg border no-print">
+            <h3 className="font-semibold text-gray-800 mb-3 flex items-center"><CalendarIcon className="w-5 h-5 mr-2"/> Takvime Ekle</h3>
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 text-center">
+                <a href={links.google} target="_blank" rel="noopener noreferrer" className="p-2 bg-white border rounded-lg hover:bg-gray-100 text-sm">Google</a>
+                <a href={links.outlook} target="_blank" rel="noopener noreferrer" className="p-2 bg-white border rounded-lg hover:bg-gray-100 text-sm">Outlook</a>
+                <a href={links.yahoo} target="_blank" rel="noopener noreferrer" className="p-2 bg-white border rounded-lg hover:bg-gray-100 text-sm">Yahoo</a>
+                <button onClick={handleDownloadIcs} className="p-2 bg-white border rounded-lg hover:bg-gray-100 text-sm">.ics İndir</button>
+            </div>
+        </div>
+    );
+};
+const TagBadge = ({ tag }) => {
+    const history = useHistory();
+    const handleTagClick = (e) => {
+        e.stopPropagation(); // Prevent card click when tag is clicked
+        history.push(`/etkinlikler?tag=${encodeURIComponent(tag)}`);
+    };
+    return (
+        <button onClick={handleTagClick} className="text-xs font-semibold inline-flex items-center py-1 px-2.5 uppercase rounded-full text-purple-600 bg-purple-200 hover:bg-purple-300 transition-colors">
+            <TagIcon className="w-3 h-3 mr-1.5" />
+            {tag}
+        </button>
     );
 };
 
@@ -695,18 +851,149 @@ const SeatSelectionPage = () => {
 };
 const EventCard = ({ event }) => { 
     const history = useHistory(); 
-    const { isAuthenticated } = useAuth();
-    const { openAuthModal } = useAuthModal();
     const handleSelectEvent = () => {
-        const action = () => history.push(`/etkinlikler/${event.id}`);
-        if (isAuthenticated) { action(); } else { openAuthModal(action); }
+        history.push(`/etkinlikler/${event.id}`);
     };
     const capacityLeft = event.capacity - event.registered; 
     const capacityColor = capacityLeft <= 5 ? 'text-red-600' : 'text-green-600'; 
-    return (<div onClick={handleSelectEvent} className="bg-white rounded-lg shadow-md overflow-hidden transform hover:-translate-y-1 transition-transform duration-300 flex flex-col cursor-pointer"><img className="h-48 w-full object-cover" src={event.imageUrl} alt={`${event.name} afişi`} /><div className="p-4 flex flex-col flex-grow"><p className="text-sm text-red-600 font-semibold">{event.category}</p><h3 className="text-lg font-bold text-gray-800 mt-1 flex-grow">{event.name}</h3><div className="mt-4 text-sm text-gray-600 space-y-2"><div className="flex items-center"><CalendarIcon className="w-4 h-4 mr-2" /><span>{new Date(event.date).toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' })}</span></div><div className="flex items-center"><LocationMarkerIcon className="w-4 h-4 mr-2" /><span>{event.location}</span></div></div><div className="mt-4 pt-4 border-t text-sm font-semibold flex justify-between items-center"><span>Kontenjan:</span><span className={capacityColor}>{capacityLeft} / {event.capacity}</span></div></div></div>);
+    return (<div onClick={handleSelectEvent} className="bg-white rounded-lg shadow-md overflow-hidden transform hover:-translate-y-1 transition-transform duration-300 flex flex-col cursor-pointer"><img className="h-48 w-full object-cover" src={event.imageUrl} alt={`${event.name} afişi`} /><div className="p-4 flex flex-col flex-grow"><p className="text-sm text-red-600 font-semibold">{event.category}</p><h3 className="text-lg font-bold text-gray-800 mt-1 flex-grow">{event.name}</h3><div className="mt-4 text-sm text-gray-600 space-y-2"><div className="flex items-center"><CalendarIcon className="w-4 h-4 mr-2" /><span>{new Date(event.date).toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' })}</span></div><div className="flex items-center"><LocationMarkerIcon className="w-4 h-4 mr-2" /><span>{event.location}</span></div></div><div className="flex flex-wrap gap-2 mt-3">{event.tags.map(tag => <TagBadge key={tag} tag={tag} />)}</div><div className="mt-4 pt-4 border-t text-sm font-semibold flex justify-between items-center"><span>Kontenjan:</span><span className={capacityColor}>{capacityLeft} / {event.capacity}</span></div></div></div>);
 };
-const EventsListPage = () => { const [events, setEvents] = useState([]); const [filteredEvents, setFilteredEvents] = useState([]); const [loading, setLoading] = useState(true); const [searchTerm, setSearchTerm] = useState(''); const [selectedCategory, setSelectedCategory] = useState('Tümü'); useEffect(() => { kohaService.getEvents().then(data => { setEvents(data); setFilteredEvents(data); setLoading(false); }); }, []); useEffect(() => { let result = events; if (selectedCategory !== 'Tümü') { result = result.filter(event => event.category === selectedCategory); } if (searchTerm) { result = result.filter(event => event.name.toLowerCase().includes(searchTerm.toLowerCase())); } setFilteredEvents(result); }, [searchTerm, selectedCategory, events]); const categories = ['Tümü', ...new Set(events.map(e => e.category))]; if (loading) return <div className="flex justify-center items-center h-96"><div className="loader"></div></div>; return (<div className="py-10"><main className="mx-auto max-w-7xl sm:px-6 lg:px-8"><div className="bg-white shadow-lg rounded-lg p-6 sm:p-8"><h1 className="text-3xl font-bold text-gray-900 mb-2">Etkinlikler</h1><p className="text-gray-600 mb-8">Kütüphanemizde düzenlenecek olan etkinlikleri keşfedin ve kaydolun.</p><div className="flex flex-col md:flex-row gap-4 mb-8"><input type="text" placeholder="Etkinlik ara..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="block w-full md:w-1/3 rounded-md border-0 py-2 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-600 sm:text-sm" /><select value={selectedCategory} onChange={e => setSelectedCategory(e.target.value)} className="block w-full md:w-1/4 rounded-md border-0 py-2 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-red-600 sm:text-sm">{categories.map(cat => <option key={cat} value={cat}>{cat}</option>)}</select></div><div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">{filteredEvents.length > 0 ? filteredEvents.map(event => <EventCard key={event.id} event={event} />) : <p className="col-span-full text-center text-gray-500">Arama kriterlerine uygun etkinlik bulunamadı.</p>}</div></div></main></div>);};
-const EventDetailPage = () => { const { eventId } = useParams(); const [event, setEvent] = useState(null); const [loading, setLoading] = useState(true); const [isRegistering, setIsRegistering] = useState(false); const [finalReservation, setFinalReservation] = useState(null); const [showSuccessModal, setShowSuccessModal] = useState(false); const [smsSent, setSmsSent] = useState(false); const [smsMessage, setSmsMessage] = useState(''); const { user, isAuthenticated } = useAuth(); const { addEventReservation, eventReservations } = useReservation(); const { openAuthModal } = useAuthModal(); const history = useHistory(); useEffect(() => { kohaService.getEventById(eventId).then(data => { setEvent(data); setLoading(false); }); }, [eventId]); const handleRegister = () => { const action = () => { setIsRegistering(true); kohaService.registerForEvent(eventId, user.id, [{tc: user.id, name: user.name}]).then(response => { if (response.success) { addEventReservation(response.reservation); setFinalReservation(response.reservation); setShowSuccessModal(true); } setIsRegistering(false); }); }; if (isAuthenticated) { action(); } else { openAuthModal(action); } }; const handleSendSms = () => { setSmsMessage('SMS başarıyla gönderildi.'); setSmsSent(true); setTimeout(() => setSmsMessage(''), 5000); }; const handlePrint = () => { window.print(); }; const isAlreadyRegistered = isAuthenticated && eventReservations.some(r => r.eventId === eventId); const isFull = event ? event.registered >= event.capacity : false; if (loading) return <div className="flex justify-center items-center h-96"><div className="loader"></div></div>; if (!event) return <p className="text-center py-10">Etkinlik bulunamadı.</p>; return (<><Modal isOpen={showSuccessModal} onClose={() => setShowSuccessModal(false)} title="Kayıt Onaylandı"><EventTicketView reservation={finalReservation} user={user} onSendSms={handleSendSms} onPrint={handlePrint} onScreenshot={takeScreenshot} smsSent={smsSent} /></Modal><div className="py-10"><main className="mx-auto max-w-4xl sm:px-6 lg:px-8"><div className="bg-white shadow-lg rounded-lg overflow-hidden"><img className="h-80 w-full object-cover" src={event.imageUrl} alt={`${event.name} afişi`} /><div className="p-8"><p className="text-sm text-red-600 font-semibold">{event.category}</p><h1 className="text-4xl font-bold text-gray-900 mt-2">{event.name}</h1><div className="flex flex-wrap gap-x-6 gap-y-2 text-gray-600 mt-4"><div className="flex items-center"><CalendarIcon className="w-5 h-5 mr-2" /><span>{new Date(event.date).toLocaleDateString('tr-TR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</span></div><div className="flex items-center"><ClockIcon className="w-5 h-5 mr-2" /><span>{new Date(event.date).toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' })}</span></div><div className="flex items-center"><LocationMarkerIcon className="w-5 h-5 mr-2" /><span>{event.location}</span></div></div><p className="text-gray-700 mt-6">{event.description}</p><div className="mt-8 pt-6 border-t">{isAlreadyRegistered ? (<div className="text-center p-4 bg-green-100 text-green-800 rounded-lg"><p className="font-semibold">Bu etkinliğe zaten kayıtlısınız.</p><a onClick={() => history.push('/rezervasyonlarim')} className="text-red-600 hover:underline cursor-pointer mt-2 inline-block">Biletinizi Görüntüleyin</a></div>) : (<Button onClick={handleRegister} isLoading={isRegistering} disabled={isFull}>{isFull ? 'Kontenjan Dolu' : 'Kayıt Ol'}</Button>)}</div></div></div></main></div></>);};
+const EventsListPage = () => { 
+    const [events, setEvents] = useState([]); 
+    const [filteredEvents, setFilteredEvents] = useState([]); 
+    const [loading, setLoading] = useState(true); 
+    const [searchTerm, setSearchTerm] = useState(''); 
+    const [selectedCategory, setSelectedCategory] = useState('Tümü');
+    const query = useQuery();
+    const history = useHistory();
+    const tagFromQuery = query.get('tag');
+
+    useEffect(() => { 
+        kohaService.getEvents().then(data => { 
+            setEvents(data); 
+            setLoading(false); 
+        }); 
+    }, []); 
+
+    useEffect(() => { 
+        let result = events; 
+        if (tagFromQuery) {
+            result = result.filter(event => event.tags.includes(tagFromQuery));
+        }
+        if (selectedCategory !== 'Tümü') { 
+            result = result.filter(event => event.category === selectedCategory); 
+        } 
+        if (searchTerm) { 
+            result = result.filter(event => event.name.toLowerCase().includes(searchTerm.toLowerCase())); 
+        } 
+        setFilteredEvents(result); 
+    }, [searchTerm, selectedCategory, events, tagFromQuery]); 
+
+    const categories = ['Tümü', ...new Set(events.map(e => e.category))];
+    const allTags = [...new Set(events.flatMap(e => e.tags))];
+    
+    const handleTagFilterChange = (tag) => {
+        history.push(`/etkinlikler?tag=${encodeURIComponent(tag)}`);
+    };
+
+    if (loading) return <div className="flex justify-center items-center h-96"><div className="loader"></div></div>; 
+    
+    return (<div className="py-10"><main className="mx-auto max-w-7xl sm:px-6 lg:px-8"><div className="bg-white shadow-lg rounded-lg p-6 sm:p-8"><h1 className="text-3xl font-bold text-gray-900 mb-2">Etkinlikler</h1><p className="text-gray-600 mb-8">Kütüphanemizde düzenlenecek olan etkinlikleri keşfedin ve kaydolun.</p><div className="flex flex-col md:flex-row gap-4 mb-4"><input type="text" placeholder="Etkinlik ara..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="block w-full md:w-1/3 rounded-md border-0 py-2 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-600 sm:text-sm" /><select value={selectedCategory} onChange={e => setSelectedCategory(e.target.value)} className="block w-full md:w-1/4 rounded-md border-0 py-2 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-red-600 sm:text-sm">{categories.map(cat => <option key={cat} value={cat}>{cat}</option>)}</select></div>
+    <div className="mb-8">
+        <div className="flex items-center gap-2 flex-wrap">
+            <span className="text-sm font-medium text-gray-700">Etiketler:</span>
+            {tagFromQuery && <button onClick={() => history.push('/etkinlikler')} className="text-xs font-semibold inline-flex items-center py-1 px-2.5 uppercase rounded-full text-white bg-red-600 hover:bg-red-700">Filtreyi Temizle <XMarkIcon className="w-3 h-3 ml-1.5"/></button>}
+            {allTags.map(tag => <button key={tag} onClick={() => handleTagFilterChange(tag)} className={`text-xs font-semibold py-1 px-2.5 rounded-full transition-colors ${tagFromQuery === tag ? 'bg-purple-600 text-white' : 'bg-purple-100 text-purple-800 hover:bg-purple-200'}`}>{tag}</button>)}
+        </div>
+    </div>
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">{filteredEvents.length > 0 ? filteredEvents.map(event => <EventCard key={event.id} event={event} />) : <p className="col-span-full text-center text-gray-500">Arama kriterlerine uygun etkinlik bulunamadı.</p>}</div></div></main></div>);
+};
+const EventDetailPage = () => { 
+    const { eventId } = useParams(); 
+    const [event, setEvent] = useState(null); 
+    const [loading, setLoading] = useState(true); 
+    const [showRegisterModal, setShowRegisterModal] = useState(false);
+    const [finalReservation, setFinalReservation] = useState(null); 
+    const [showSuccessModal, setShowSuccessModal] = useState(false); 
+    const [smsSent, setSmsSent] = useState(false); 
+    const { user, isAuthenticated } = useAuth(); 
+    const { addEventReservation, eventReservations } = useReservation(); 
+    const { openAuthModal } = useAuthModal(); 
+    const history = useHistory(); 
+
+    useEffect(() => { kohaService.getEventById(eventId).then(data => { setEvent(data); setLoading(false); }); }, [eventId]); 
+    
+    const handleRegisterClick = () => {
+        const action = () => setShowRegisterModal(true);
+        if (isAuthenticated) { action(); } else { openAuthModal(action); }
+    };
+
+    const onRegistrationSuccess = (reservation) => {
+        setShowRegisterModal(false);
+        addEventReservation(reservation);
+        setFinalReservation(reservation);
+        setShowSuccessModal(true);
+    };
+
+    const handleSendSms = () => { setSmsSent(true); }; 
+    const handlePrint = () => { window.print(); }; 
+    
+    const isAlreadyRegistered = isAuthenticated && eventReservations.some(r => r.eventId === eventId); 
+    const isFull = event ? event.registered >= event.capacity : false; 
+    
+    if (loading) return <div className="flex justify-center items-center h-96"><div className="loader"></div></div>; 
+    if (!event) return <p className="text-center py-10">Etkinlik bulunamadı.</p>; 
+    
+    return (
+        <>
+            <EventRegistrationModal 
+                isOpen={showRegisterModal} 
+                onClose={() => setShowRegisterModal(false)} 
+                event={event} 
+                onSuccess={onRegistrationSuccess}
+            />
+            <Modal isOpen={showSuccessModal} onClose={() => setShowSuccessModal(false)} title="Kayıt Onaylandı" size="lg">
+                <EventTicketView 
+                    reservation={finalReservation} 
+                    user={user} 
+                    onSendSms={handleSendSms} 
+                    onPrint={handlePrint} 
+                    onScreenshot={takeScreenshot} 
+                    smsSent={smsSent} 
+                />
+            </Modal>
+            <div className="py-10">
+                <main className="mx-auto max-w-4xl sm:px-6 lg:px-8">
+                    <div className="bg-white shadow-lg rounded-lg overflow-hidden">
+                        <img className="h-80 w-full object-cover" src={event.imageUrl} alt={`${event.name} afişi`} />
+                        <div className="p-8">
+                            <p className="text-sm text-red-600 font-semibold">{event.category}</p>
+                            <h1 className="text-4xl font-bold text-gray-900 mt-2">{event.name}</h1>
+                            <div className="flex flex-wrap gap-x-6 gap-y-2 text-gray-600 mt-4">
+                                <div className="flex items-center"><CalendarIcon className="w-5 h-5 mr-2" /><span>{new Date(event.date).toLocaleDateString('tr-TR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</span></div>
+                                <div className="flex items-center"><ClockIcon className="w-5 h-5 mr-2" /><span>{new Date(event.date).toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' })}</span></div>
+                                <div className="flex items-center"><LocationMarkerIcon className="w-5 h-5 mr-2" /><span>{event.location}</span></div>
+                            </div>
+                             <div className="flex flex-wrap gap-2 mt-4">{event.tags.map(tag => <TagBadge key={tag} tag={tag} />)}</div>
+                            <p className="text-gray-700 mt-6">{event.description}</p>
+                            <div className="mt-8 pt-6 border-t space-y-4">
+                                <CalendarExport event={event} />
+                                {isAlreadyRegistered ? (
+                                    <div className="text-center p-4 bg-green-100 text-green-800 rounded-lg">
+                                        <p className="font-semibold">Bu etkinliğe zaten kayıtlısınız.</p>
+                                        <a onClick={() => history.push('/rezervasyonlarim')} className="text-red-600 hover:underline cursor-pointer mt-2 inline-block">Biletinizi Görüntüleyin</a>
+                                    </div>
+                                ) : (
+                                    <Button onClick={handleRegisterClick} disabled={isFull}>{isFull ? 'Kontenjan Dolu' : 'Kayıt Ol'}</Button>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </>
+    );
+};
 const MyReservationsPage = () => {
     const { seatReservation, eventReservations, groupReservation, cancelMySeatReservation, notificationRequest, removeNotificationRequest, breakInfo } = useReservation();
     const { user } = useAuth();
@@ -794,6 +1081,188 @@ const GroupParticipantModal = ({ isOpen, onClose, room, onConfirm, isReserving }
     const addParticipant = (e) => { e.preventDefault(); if (participants.length >= room.capacity) { setError('Oda kapasitesine ulaşıldı.'); return; } if (!/^\d{11}$/.test(tc)) { setError('Geçerli bir T.C. Kimlik Numarası girin.'); return; } if (participants.some(p => p.tc === tc)) { setError('Bu katılımcı zaten eklendi.'); return; } setParticipants([...participants, { tc, name }]); setTc(''); setName(''); setError(''); };
     const removeParticipant = (tcToRemove) => { setParticipants(participants.filter(p => p.tc !== tcToRemove)); };
     return (<Modal isOpen={isOpen} onClose={onClose} title={`Katılımcı Ekle: ${room.name}`} size="lg"><div><div className="bg-yellow-50 border-l-4 border-yellow-400 text-yellow-700 p-4 mb-4" role="alert"><p className="font-bold">Önemli Bilgi</p><p>Lütfen dikkat: Eklediğiniz tüm katılımcıların kütüphaneye aktif üye olması gerekmektedir.</p></div><p className="text-sm text-gray-600 mb-4">Bu oda için en az <span className="font-bold">{minParticipants}</span>, en fazla <span className="font-bold">{room.capacity}</span> kişi gereklidir.</p><form onSubmit={addParticipant} className="flex items-end gap-2 mb-4"><div className="flex-1"><label className="block text-sm font-medium text-gray-700">T.C. Kimlik No</label><input type="text" value={tc} onChange={e => setTc(e.target.value.replace(/\D/g, ''))} maxLength="11" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 sm:text-sm" required /></div><div className="flex-1"><label className="block text-sm font-medium text-gray-700">Ad Soyad</label><input type="text" value={name} onChange={e => setName(e.target.value)} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 sm:text-sm" required /></div><Button type="submit" variant="secondary" className="w-auto px-4 py-2">Ekle</Button></form>{error && <p className="text-red-500 text-sm mb-2">{error}</p>}<div className="mt-4 border-t pt-4"><h4 className="font-semibold">Katılımcı Listesi ({participants.length}/{room.capacity})</h4><ul className="mt-2 space-y-2 max-h-40 overflow-y-auto">{participants.map((p, index) => (<li key={p.tc} className="flex justify-between items-center bg-gray-100 p-2 rounded"><div><span className="font-medium">{p.name}</span><span className="text-sm text-gray-500 ml-2">{p.tc}</span></div>{index > 0 && <button onClick={() => removeParticipant(p.tc)}><TrashIcon className="w-5 h-5 text-red-500 hover:text-red-700"/></button>}</li>))}</ul></div><div className="mt-6"><Button onClick={() => onConfirm(participants)} disabled={!canConfirm || isReserving} isLoading={isReserving}>{canConfirm ? 'Rezervasyonu Onayla' : `${minParticipants} Kişi Gerekli`}</Button></div></div></Modal>);
+};
+const EventRegistrationModal = ({ isOpen, onClose, event, onSuccess }) => {
+    const { user } = useAuth();
+    const [step, setStep] = useState('participants'); // participants, otp
+    const [participants, setParticipants] = useState([]);
+    const [newParticipantTc, setNewParticipantTc] = useState('');
+    const [error, setError] = useState('');
+    const [kvkkAccepted, setKvkkAccepted] = useState(false);
+    const [isKvkkOpen, setIsKvkkOpen] = useState(false);
+    const [otp, setOtp] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
+
+    useEffect(() => {
+        if (isOpen && user) {
+            setParticipants([{ tc: user.id, name: user.name }]);
+        } else if (!isOpen) {
+            // Reset state on close
+            setStep('participants');
+            setParticipants([]);
+            setNewParticipantTc('');
+            setError('');
+            setKvkkAccepted(false);
+            setIsKvkkOpen(false);
+            setOtp('');
+            setIsLoading(false);
+        }
+    }, [isOpen, user]);
+
+    if (!event) return null;
+
+    const handleAddParticipant = async (e) => {
+        e.preventDefault();
+        setError('');
+        if (participants.length >= event.capacity - event.registered) {
+            setError('Etkinlik kapasitesine ulaşıldı.');
+            return;
+        }
+        if (!/^\d{11}$/.test(newParticipantTc)) {
+            setError('Geçerli bir T.C. Kimlik Numarası girin.');
+            return;
+        }
+        if (participants.some(p => p.tc === newParticipantTc)) {
+            setError('Bu katılımcı zaten eklendi.');
+            return;
+        }
+        
+        // Simulate user lookup
+        const foundUser = MOCK_USERS.find(u => u.id === newParticipantTc);
+        if (!foundUser) {
+            setError('Bu T.C. Kimlik Numarasına sahip bir üye bulunamadı.');
+            return;
+        }
+
+        setParticipants([...participants, { tc: newParticipantTc, name: foundUser.name }]);
+        setNewParticipantTc('');
+    };
+    
+    const removeParticipant = (tcToRemove) => {
+        setParticipants(participants.filter(p => p.tc !== tcToRemove));
+    };
+
+    const handleProceedToOtp = () => {
+        setError('');
+        if (!kvkkAccepted) {
+            setError('Devam etmek için KVKK metnini onaylamanız gerekmektedir.');
+            return;
+        }
+        setStep('otp');
+    };
+
+    const handleConfirmRegistration = async () => {
+        setError('');
+        setIsLoading(true);
+        // OTP Simulation
+        if (otp !== '563888') {
+            setError('Hatalı onay kodu. Lütfen tekrar deneyin.');
+            setIsLoading(false);
+            return;
+        }
+
+        try {
+            const response = await kohaService.registerForEvent(event.id, user.id, participants);
+            if (response.success) {
+                onSuccess(response.reservation);
+            } else {
+                setError(response.message || 'Rezervasyon sırasında bir hata oluştu.');
+            }
+        } catch (err) {
+            setError('Sunucu hatası. Lütfen daha sonra tekrar deneyin.');
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    const renderParticipantStep = () => (
+        <div>
+            <p className="text-sm text-gray-600 mb-4">Lütfen sizinle birlikte katılacak diğer kişilerin T.C. Kimlik Numaralarını ekleyin.</p>
+            {/* --- LAYOUT CHANGE APPLIED HERE --- */}
+            <form onSubmit={handleAddParticipant} className="flex flex-col sm:flex-row sm:items-end gap-2 mb-4">
+                <div className="flex-grow">
+                    <label htmlFor="participant-tc" className="block text-sm font-medium text-gray-700">
+                        Katılımcı T.C. Kimlik No
+                    </label>
+                    <p className="text-xs text-gray-500 mb-1">11 haneli T.C. No</p>
+                    <input 
+                        id="participant-tc" 
+                        type="text" 
+                        value={newParticipantTc} 
+                        onChange={e => setNewParticipantTc(e.target.value.replace(/\D/g, ''))} 
+                        maxLength="11" 
+                        className="block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 sm:text-sm"
+                    />
+                </div>
+                <Button type="submit" variant="secondary" className="w-full sm:w-auto px-4 py-2 mt-2 sm:mt-0">Ekle</Button>
+            </form>
+            {/* --- END OF LAYOUT CHANGE --- */}
+            
+            <div className="mt-4 border-t pt-4">
+                <h4 className="font-semibold">Katılımcı Listesi ({participants.length} / {event.capacity - event.registered})</h4>
+                <ul className="mt-2 space-y-2 max-h-32 overflow-y-auto">
+                    {participants.map((p, index) => (
+                        <li key={p.tc} className="flex justify-between items-center bg-gray-100 p-2 rounded">
+                            <span className="font-medium">{maskName(p.name)}</span>
+                            {index > 0 && <button onClick={() => removeParticipant(p.tc)}><TrashIcon className="w-5 h-5 text-red-500 hover:text-red-700"/></button>}
+                        </li>
+                    ))}
+                </ul>
+            </div>
+
+            <div className="mt-4 border-t pt-4">
+                <div className="bg-gray-50 rounded-lg border">
+                    <button onClick={() => setIsKvkkOpen(!isKvkkOpen)} className="w-full p-3 flex justify-between items-center text-left">
+                        <span className="font-semibold text-gray-700">Kişisel Verilerin Korunması Hakkında Bilgilendirme</span>
+                        <ChevronDownIcon className={`w-5 h-5 transition-transform ${isKvkkOpen ? 'rotate-180' : ''}`} />
+                    </button>
+                    {isKvkkOpen && (
+                        <div className="p-3 border-t text-xs text-gray-600 max-h-24 overflow-y-auto">
+                            <p>6698 sayılı Kişisel Verilerin Korunması Kanunu (“KVKK”) uyarınca, kimlik ve iletişim verileriniz, etkinliğe katılımınızın sağlanması, organize edilmesi ve bu kapsamda sizinle iletişim kurulması amacıyla işlenecektir. Kişisel verileriniz, yasal zorunluluklar dışında üçüncü kişilerle paylaşılmayacaktır. KVKK’nın 11. maddesi kapsamındaki haklarınıza ilişkin detaylı bilgiye kütüphanemizden veya web sitemizden ulaşabilirsiniz.</p>
+                        </div>
+                    )}
+                </div>
+                <div className="mt-3 flex items-center">
+                    <input id="kvkk" name="kvkk" type="checkbox" checked={kvkkAccepted} onChange={(e) => setKvkkAccepted(e.target.checked)} className="h-4 w-4 rounded border-gray-300 text-red-600 focus:ring-red-600" />
+                    <label htmlFor="kvkk" className="ml-2 block text-sm text-gray-900">Kişisel verilerimin etkinlik rezervasyonu amacıyla işlenmesine <a href="#" className="text-red-600 hover:underline">onay veriyorum</a>.</label>
+                </div>
+            </div>
+            
+            {error && <p className="text-red-600 text-sm mt-4 text-center">{error}</p>}
+            
+            <div className="mt-6">
+                <Button onClick={handleProceedToOtp} disabled={!kvkkAccepted || participants.length === 0}>Onay Adımına Geç</Button>
+            </div>
+        </div>
+    );
+
+    const renderOtpStep = () => (
+        <div>
+            <h3 className="text-lg font-semibold text-center mb-2">SMS Onayı</h3>
+            <p className="text-center text-sm text-gray-500 mb-4">Kayıtlı telefon numaranıza gönderilen 6 haneli onay kodunu giriniz.</p>
+            <div className="p-3 bg-blue-50 text-blue-800 rounded-lg text-center mb-4">
+                <p className="font-bold">Prototip Bilgisi</p>
+                <p>Onay Kodu: <span className="font-mono text-lg">563888</span></p>
+            </div>
+            <div>
+                <label htmlFor="otp" className="block text-sm font-medium leading-6 text-gray-900">Onay Kodu</label>
+                <div className="mt-2">
+                    <input id="otp" name="otp" type="text" value={otp} onChange={(e) => setOtp(e.target.value.replace(/\D/g, ''))} maxLength="6" className="block w-full rounded-md border-0 py-2 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-600 sm:text-sm text-center text-2xl tracking-[.5em]" required />
+                </div>
+            </div>
+            {error && <p className="mt-2 text-sm text-red-600 text-center">{error}</p>}
+            <div className="mt-6 grid grid-cols-2 gap-3">
+                <Button onClick={() => setStep('participants')} variant="secondary">Geri</Button>
+                <Button onClick={handleConfirmRegistration} isLoading={isLoading}>Kaydı Onayla</Button>
+            </div>
+        </div>
+    );
+
+    return (
+        <Modal isOpen={isOpen} onClose={onClose} title={`Etkinlik Kaydı: ${event.name}`} size="lg">
+            {step === 'participants' ? renderParticipantStep() : renderOtpStep()}
+        </Modal>
+    );
 };
 
 // --- AUTH MODAL & ONBOARDING ---
@@ -988,16 +1457,39 @@ const AuthModal = () => {
     );
 };
 
+const DeveloperCredit = () => {
+    return (
+        <a
+            href="https://www.ismailkaraca.com.tr/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="fixed bottom-4 right-4 z-50 flex items-center gap-3 rounded-lg bg-white px-4 py-2 text-xs text-gray-700 shadow-lg transition-shadow hover:shadow-xl"
+        >
+            <img
+                src="https://www.ismailkaraca.com.tr/wp-content/uploads/2025/03/ismail1002025.svg"
+                alt="İsmail Karaca Logo"
+                className="h-8 w-8 rounded-full"
+            />
+            <span className="font-medium hidden sm:inline">
+                Bu Frontend Prototype (Ön Yüz Prototipi) "İsmail Karaca" tarafından geliştirilmiştir.
+            </span>
+            <span className="font-medium sm:hidden">
+                İsmail Karaca
+            </span>
+        </a>
+    );
+};
+
 
 // --- MAIN APP COMPONENT ---
 const AppContent = () => {
-  const [currentPath, setCurrentPath] = useState('/rezervasyon/salonlar');
+  const [currentPath, setCurrentPath] = useState('/etkinlikler'); // Default to events page
   const { isBreakModalOpen, closeBreakModal } = useBreakModal();
   
   return (
     <RouterContext.Provider value={{ currentPath, setCurrentPath }}>
         <GlobalStyles />
-        <div className="min-h-screen bg-gray-100">
+        <div className="min-h-screen bg-gray-100 relative">
             <Header />
             <AppNotification />
             <AuthModal />
@@ -1006,27 +1498,14 @@ const AppContent = () => {
             <Route path="/rezervasyon/salonlar/" component={<SeatSelectionPage/>} />
             <Route path="/rezervasyonlarim" component={<MyReservationsPage />} exact={true} />
             <Route path="/grup-rezervasyon" component={<GroupReservationPage />} exact={true} />
+            
+            {/* --- BUG FIX APPLIED --- */}
+            {/* The list page route must be 'exact' to avoid matching detail pages like /etkinlikler/evt-1. */}
             <Route path="/etkinlikler" component={<EventsListPage />} exact={true} />
+            {/* The detail page route must NOT be 'exact' to match paths with IDs. */}
             <Route path="/etkinlikler/" component={<EventDetailPage />} />
-             {/* Credit Footer */}
-            <a
-                href="https://www.ismailkaraca.com.tr/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="fixed bottom-4 right-4 z-50 flex items-center gap-3 rounded-lg bg-white px-4 py-2 text-xs text-gray-700 shadow-lg transition-shadow hover:shadow-xl"
-            >
-                <img
-                    src="https://www.ismailkaraca.com.tr/wp-content/uploads/2025/03/ismail1002025.svg"
-                    alt="İsmail Karaca Logo"
-                    className="h-8 w-8 rounded-full"
-                />
-                <span className="font-medium hidden sm:inline">
-                    Bu Frontend Prototype (Ön Yüz Prototipi) "İsmail Karaca" tarafından geliştirilmiştir.
-                </span>
-                <span className="font-medium sm:hidden">
-                   Bu Frontend Prototype (Ön Yüz Prototipi) "İsmail Karaca" tarafından geliştirilmiştir.
-                </span>
-            </a>
+            
+            <DeveloperCredit />
         </div>
     </RouterContext.Provider>
   );
