@@ -17,7 +17,6 @@ const MenuIcon = ({ className }) => (<svg className={className} xmlns="http://ww
 const BellIcon = ({ className }) => (<svg className={className} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" /></svg>);
 const PauseIcon = ({ className }) => (<svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" /></svg>);
 const PlayIcon = ({ className }) => (<svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z" /></svg>);
-const ExternalLinkIcon = ({ className }) => (<svg className={className} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-4.5 0V6.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v2.25m-7.5 0h7.5" /></svg>);
 
 // --- STYLES (TAILWIND & PRINT) ---
 const GlobalStyles = () => (
@@ -223,7 +222,7 @@ export const ReservationProvider = ({ children }) => {
     const [groupReservation, setGroupReservation] = useState(null);
     const [notificationRequest, setNotificationRequest] = useState(null);
     const [appNotification, setAppNotification] = useState(null);
-    const [breakInfo, setBreakInfo] = useState({ isOnBreak: false, startTime: null, endTime: null, availableBreaks: { short: 3, long: 1 } });
+    const [breakInfo, setBreakInfo] = useState({ isOnBreak: false, endTime: null, availableBreaks: { short: 3, long: 1 } });
     const breakTimers = useRef({ reminder: null, cancellation: null });
     const { user, isAuthenticated } = useAuth();
 
@@ -249,7 +248,7 @@ export const ReservationProvider = ({ children }) => {
         if (result.success) {
             setSeatReservation(null);
             clearBreakTimers();
-            setBreakInfo(prev => ({ ...prev, isOnBreak: false, startTime: null, endTime: null }));
+            setBreakInfo(prev => ({ ...prev, isOnBreak: false, endTime: null }));
             if (reason === 'break_exceeded') {
                  setAppNotification({ type: 'error', message: 'Mola süresi aşıldığı için rezervasyonunuz iptal edildi.' });
             } else if (result.notificationSent) {
@@ -263,14 +262,8 @@ export const ReservationProvider = ({ children }) => {
         const gracePeriod = 3 * 60 * 1000;
         const reminderTime = 3 * 60 * 1000;
         const durationMs = duration * 60 * 1000;
-        const startTime = new Date();
-        const endTime = new Date(startTime.getTime() + durationMs);
-        setBreakInfo(prev => ({ 
-            isOnBreak: true, 
-            startTime: startTime.toISOString(), 
-            endTime, 
-            availableBreaks: { ...prev.availableBreaks, [type]: prev.availableBreaks[type] - 1 } 
-        }));
+        const endTime = new Date(Date.now() + durationMs);
+        setBreakInfo(prev => ({ isOnBreak: true, endTime, availableBreaks: { ...prev.availableBreaks, [type]: prev.availableBreaks[type] - 1 } }));
         breakTimers.current.reminder = setTimeout(() => { setAppNotification({ type: 'info', message: 'Mola sürenizin dolmasına 3 dakika kaldı!' }); }, durationMs - reminderTime);
         breakTimers.current.cancellation = setTimeout(() => { cancelMySeatReservation('break_exceeded'); }, durationMs + gracePeriod);
         setAppNotification({ type: 'success', message: `${duration} dakikalık molanız başladı.` });
@@ -278,7 +271,7 @@ export const ReservationProvider = ({ children }) => {
 
     const endBreak = () => {
         clearBreakTimers();
-        setBreakInfo(prev => ({ ...prev, isOnBreak: false, startTime: null, endTime: null }));
+        setBreakInfo(prev => ({ ...prev, isOnBreak: false, endTime: null }));
         setAppNotification({ type: 'success', message: 'Tekrar hoş geldiniz! Oturumunuz aktif hale getirildi.' });
     };
 
@@ -382,16 +375,10 @@ const Header = () => {
         setMobileMenuOpen(false);
     };
 
-    const AppTitle = () => (
-        <span className="font-bold text-gray-800 text-xs sm:text-sm lg:text-base">
-            Koha Kütüphane Otomasyon Sistemi Entegrasyonlu Yer Seçme, Rezervasyon ve Etkinlik Yönetimi Sistemi
-        </span>
-    );
-
     return (
         <header className="bg-white shadow-md sticky top-0 z-50 no-print">
             <nav className="mx-auto flex max-w-7xl items-center justify-between p-4 lg:px-8" aria-label="Global">
-                <div className="flex lg:flex-1"><a onClick={() => navigateTo('/rezervasyon/salonlar')} className="-m-1.5 p-1.5 cursor-pointer flex items-center"><AppTitle /></a></div>
+                <div className="flex lg:flex-1"><a onClick={() => navigateTo('/rezervasyon/salonlar')} className="-m-1.5 p-1.5 cursor-pointer flex items-center"><span className="font-bold text-gray-800 text-base sm:text-lg">KYGM Rezervasyon</span></a></div>
                 <div className="flex lg:hidden"><button type="button" className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700" onClick={() => setMobileMenuOpen(true)}><span className="sr-only">Menüyü aç</span><MenuIcon className="h-6 w-6" aria-hidden="true" /></button></div>
                 <div className="hidden lg:flex lg:items-center lg:gap-x-6">
                     <a onClick={() => navigateTo('/rezervasyon/salonlar')} className="text-sm font-semibold leading-6 text-gray-900 cursor-pointer hover:text-red-600">Yer Seçme</a>
@@ -400,10 +387,6 @@ const Header = () => {
                     {isAuthenticated && <a onClick={() => navigateTo('/rezervasyonlarim')} className="text-sm font-semibold leading-6 text-gray-900 cursor-pointer hover:text-red-600">Rezervasyonlarım/Taleplerim</a>}
                     {showBreakButton && <a onClick={openBreakModal} className="text-sm font-semibold leading-6 text-blue-600 cursor-pointer hover:text-blue-800 flex items-center gap-1"><PauseIcon className="w-4 h-4" /> Mola Yönetimi</a>}
                     
-                    <a href="https://kutuphaneveteknoloji.com/yersecmepanel.html" target="_blank" rel="noopener noreferrer" className="bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-semibold py-2 px-4 rounded-lg flex items-center gap-2 transition-colors">
-                        Yönetim Paneli <ExternalLinkIcon className="w-4 h-4" />
-                    </a>
-
                     {isAuthenticated ? (
                         <div className="flex items-center gap-x-4">
                              <div className="relative">
@@ -428,14 +411,13 @@ const Header = () => {
             <div className={`lg:hidden ${mobileMenuOpen ? 'block' : 'hidden'}`} role="dialog" aria-modal="true">
                 <div className="fixed inset-0 z-50" />
                 <div className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
-                    <div className="flex items-center justify-between"><a onClick={() => navigateTo('/rezervasyon/salonlar')} className="-m-1.5 p-1.5 cursor-pointer flex items-center"><AppTitle /></a><button type="button" className="-m-2.5 rounded-md p-2.5 text-gray-700" onClick={() => setMobileMenuOpen(false)}><span className="sr-only">Menüyü kapat</span><XMarkIcon className="h-6 w-6" aria-hidden="true" /></button></div>
+                    <div className="flex items-center justify-between"><a onClick={() => navigateTo('/rezervasyon/salonlar')} className="-m-1.5 p-1.5 cursor-pointer flex items-center"><span className="font-bold text-gray-800 text-base">KYGM Rezervasyon</span></a><button type="button" className="-m-2.5 rounded-md p-2.5 text-gray-700" onClick={() => setMobileMenuOpen(false)}><span className="sr-only">Menüyü kapat</span><XMarkIcon className="h-6 w-6" aria-hidden="true" /></button></div>
                     <div className="mt-6 flow-root"><div className="-my-6 divide-y divide-gray-500/10"><div className="space-y-2 py-6">
                         <a onClick={() => navigateTo('/rezervasyon/salonlar')} className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 cursor-pointer">Yer Seçme</a>
                         <a onClick={() => navigateTo('/grup-rezervasyon')} className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 cursor-pointer">Grup Odası Rezervasyonu</a>
                         <a onClick={() => navigateTo('/etkinlikler')} className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 cursor-pointer">Etkinlik Rezervasyonu</a>
                         {isAuthenticated && <a onClick={() => navigateTo('/rezervasyonlarim')} className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 cursor-pointer">Rezervasyonlarım/Taleplerim</a>}
                         {showBreakButton && <a onClick={handleOpenBreakModal} className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-blue-600 hover:bg-blue-50 cursor-pointer">Mola Yönetimi</a>}
-                        <a href="https://kutuphaneveteknoloji.com/yersecmepanel.html" target="_blank" rel="noopener noreferrer" className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 cursor-pointer">Yönetim Paneli</a>
                     </div><div className="py-6">
                         {isAuthenticated ? (
                              <div className="mb-4">
@@ -444,7 +426,7 @@ const Header = () => {
                                 <a onClick={handleLogout} className="mt-2 inline-block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-red-600 hover:bg-gray-50 cursor-pointer w-full text-center ring-1 ring-inset ring-red-200">Çıkış Yap</a>
                              </div>
                         ) : (
-                            <a onClick={() => { closeAuthModal(); openAuthModal(); }} className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 cursor-pointer">Giriş Yap</a>
+                            <a onClick={() => { openAuthModal(); }} className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 cursor-pointer">Giriş Yap</a>
                         )}
                     </div></div></div>
                 </div>
@@ -561,8 +543,7 @@ const Seat = ({ seat, isSelected }) => {
     return (<div className={`rounded-lg p-2 flex flex-col items-center justify-center transition-all duration-300 w-24 h-24 text-center ${statusClasses[currentStatus]}`}><SeatIcon className="w-8 h-8 mb-1" /><span className="font-bold text-sm">{seat.id}</span><span className="text-xs capitalize">{currentStatus === 'available' ? 'Boş' : (currentStatus === 'occupied' ? 'Dolu' : (currentStatus === 'selected' ? 'Seçildi' : 'Servis Dışı'))}</span></div>);
 };
 const BreakManagementModal = ({ isOpen, onClose }) => {
-    const { breakInfo, startBreak, endBreak, seatReservation } = useReservation();
-    const { user } = useAuth();
+    const { breakInfo, startBreak, endBreak } = useReservation();
     const [timeLeft, setTimeLeft] = useState(0);
 
     useEffect(() => {
@@ -589,26 +570,8 @@ const BreakManagementModal = ({ isOpen, onClose }) => {
     
     const handleStartBreak = (duration, type) => {
         startBreak(duration, type);
+        onClose();
     };
-
-    let breakQrUrl = null;
-    if (breakInfo.isOnBreak && user && seatReservation && breakInfo.endTime) {
-        const now = Math.floor(Date.now() / 1000);
-        const payload = {
-            jti: `jwt-break-${seatReservation.id}-${now}`,
-            iat: now,
-            exp: Math.floor(new Date(breakInfo.endTime).getTime() / 1000) + 180, // end time + 3 min grace
-            sub: user.id,
-            typ: 'break_session',
-            resId: seatReservation.id,
-            sId: seatReservation.seatId,
-            hId: seatReservation.hallId,
-            breakStart: breakInfo.startTime,
-            breakEnd: breakInfo.endTime.toISOString(),
-        };
-        const token = createSecureQrToken(payload);
-        breakQrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(token)}`;
-    }
 
     return (
         <Modal isOpen={isOpen} onClose={onClose} title="Mola Yönetimi">
@@ -618,15 +581,6 @@ const BreakManagementModal = ({ isOpen, onClose }) => {
                     <div className="my-4 text-6xl font-bold text-red-600 font-mono">
                         {formatTime(timeLeft)}
                     </div>
-
-                    {breakQrUrl && (
-                        <div className="my-6 p-4 bg-gray-50 rounded-lg border">
-                            <h4 className="font-semibold text-gray-700 mb-2">Mola Geçiş Kodu</h4>
-                            <p className="text-xs text-gray-500 mb-3">Çıkış ve girişlerde turnikelerde veya personele okutmak için bu QR kodu kullanın.</p>
-                            <img src={breakQrUrl} crossOrigin="anonymous" alt="Mola QR Kodu" className="mx-auto rounded-lg shadow-md" />
-                        </div>
-                    )}
-
                     <p className="text-sm text-gray-500 mb-6">Mola süreniz bittiğinde yerinizi kaybetmemek için 3 dakikalık ek süreniz bulunmaktadır.</p>
                     <Button onClick={() => { endBreak(); onClose(); }} variant="secondary">
                         <PlayIcon className="w-5 h-5 mr-2" /> Giriş Yaptım / Molayı Bitir
@@ -1036,49 +990,9 @@ const AuthModal = () => {
 
 
 // --- MAIN APP COMPONENT ---
-
-/**
- * Geliştirici imzasını ve logosunu gösteren, tıklandığında web sitesine yönlendiren bir React bileşeni.
- * Bu bileşen ekranın sağ alt köşesinde sabit olarak konumlandırılmıştır.
- */
-const DeveloperCredit = () => {
-  // Stil ve içerik için Tailwind CSS sınıfları kullanılmıştır.
-  return (
-    <a
-      href="https://www.ismailkaraca.com.tr/"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="fixed bottom-4 right-4 z-50 flex items-center p-3 bg-white/80 backdrop-blur-sm border border-gray-200 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 ease-in-out transform hover:-translate-y-1"
-      title='Frontend Prototype (Ön Yüz Prototipi) "İsmail Karaca" tarafından geliştirilmiştir.'
-    >
-      {/* Geliştirici Logosu */}
-      <img
-        src="https://www.ismailkaraca.com.tr/wp-content/uploads/2025/03/ismail1002025.svg"
-        alt="İsmail Karaca Logo"
-        className="w-10 h-10 mr-3 rounded-full object-cover"
-        // Resim yüklenemezse fallback gösterilir.
-        onError={(e) => {
-          e.target.onerror = null;
-          e.target.src = 'https://placehold.co/40x40/1e293b/ffffff?text=IK';
-          e.target.alt = 'İsmail Karaca Baş Harfleri';
-        }}
-      />
-      {/* Geliştirici Bilgi Metni */}
-      <div className="flex-col hidden sm:flex">
-         <span className="text-xs font-bold text-gray-800">
-          İsmail Karaca
-        </span>
-        <span className="text-xs text-gray-600">
-Bu Frontend Prototype (Ön Yüz Prototipi) "İsmail Karaca" tarafından geliştirilmiştir.
-        </span>
-      </div>
-    </a>
-  );
-};
-
 const AppContent = () => {
   const [currentPath, setCurrentPath] = useState('/rezervasyon/salonlar');
-  const { isBreakModalOpen, openBreakModal, closeBreakModal } = useBreakModal();
+  const { isBreakModalOpen, closeBreakModal } = useBreakModal();
   
   return (
     <RouterContext.Provider value={{ currentPath, setCurrentPath }}>
@@ -1094,7 +1008,25 @@ const AppContent = () => {
             <Route path="/grup-rezervasyon" component={<GroupReservationPage />} exact={true} />
             <Route path="/etkinlikler" component={<EventsListPage />} exact={true} />
             <Route path="/etkinlikler/" component={<EventDetailPage />} />
-            <DeveloperCredit />
+             {/* Credit Footer */}
+            <a
+                href="https://www.ismailkaraca.com.tr/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="fixed bottom-4 right-4 z-50 flex items-center gap-3 rounded-lg bg-white px-4 py-2 text-xs text-gray-700 shadow-lg transition-shadow hover:shadow-xl"
+            >
+                <img
+                    src="https://www.ismailkaraca.com.tr/wp-content/uploads/2025/03/ismail1002025.svg"
+                    alt="İsmail Karaca Logo"
+                    className="h-8 w-8 rounded-full"
+                />
+                <span className="font-medium hidden sm:inline">
+                    Bu Frontend Prototype (Ön Yüz Prototipi) "İsmail Karaca" tarafından geliştirilmiştir.
+                </span>
+                <span className="font-medium sm:hidden">
+                   Bu Frontend Prototype (Ön Yüz Prototipi) "İsmail Karaca" tarafından geliştirilmiştir.
+                </span>
+            </a>
         </div>
     </RouterContext.Provider>
   );
@@ -1110,4 +1042,3 @@ export default function App() {
 
   return (<AuthProvider><AuthModalProvider><ReservationProvider><BreakModalProvider><AppContent /></BreakModalProvider></ReservationProvider></AuthModalProvider></AuthProvider>);
 }
-
