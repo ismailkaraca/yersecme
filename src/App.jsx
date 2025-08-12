@@ -856,14 +856,33 @@ const EventCard = ({ event }) => {
     };
     const capacityLeft = event.capacity - event.registered; 
     const capacityColor = capacityLeft <= 5 ? 'text-red-600' : 'text-green-600'; 
-    return (<div onClick={handleSelectEvent} className="bg-white rounded-lg shadow-md overflow-hidden transform hover:-translate-y-1 transition-transform duration-300 flex flex-col cursor-pointer"><img className="h-48 w-full object-cover" src={event.imageUrl} alt={`${event.name} afişi`} /><div className="p-4 flex flex-col flex-grow"><p className="text-sm text-red-600 font-semibold">{event.category}</p><h3 className="text-lg font-bold text-gray-800 mt-1 flex-grow">{event.name}</h3><div className="mt-4 text-sm text-gray-600 space-y-2"><div className="flex items-center"><CalendarIcon className="w-4 h-4 mr-2" /><span>{new Date(event.date).toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' })}</span></div><div className="flex items-center"><LocationMarkerIcon className="w-4 h-4 mr-2" /><span>{event.location}</span></div></div><div className="flex flex-wrap gap-2 mt-3">{event.tags.map(tag => <TagBadge key={tag} tag={tag} />)}</div><div className="mt-4 pt-4 border-t text-sm font-semibold flex justify-between items-center"><span>Kontenjan:</span><span className={capacityColor}>{capacityLeft} / {event.capacity}</span></div></div></div>);
+    return (
+        <div onClick={handleSelectEvent} className="bg-white rounded-lg shadow-md overflow-hidden transform hover:-translate-y-1 transition-transform duration-300 flex flex-col cursor-pointer">
+            <img className="h-48 w-full object-cover" src={event.imageUrl} alt={`${event.name} afişi`} />
+            <div className="p-4 flex flex-col flex-grow">
+                <p className="text-sm text-red-600 font-semibold">{event.category}</p>
+                <h3 className="text-lg font-bold text-gray-800 mt-1 flex-grow">{event.name}</h3>
+                <div className="mt-4 text-sm text-gray-600 space-y-2">
+                    <div className="flex items-center"><CalendarIcon className="w-4 h-4 mr-2" /><span>{new Date(event.date).toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' })}</span></div>
+                    <div className="flex items-center"><LocationMarkerIcon className="w-4 h-4 mr-2" /><span>{event.location}</span></div>
+                    <div className="flex items-center"><UsersIcon className="w-4 h-4 mr-2" /><span>{event.targetAudience}</span></div>
+                </div>
+                <div className="flex flex-wrap gap-2 mt-3">{event.tags.map(tag => <TagBadge key={tag} tag={tag} />)}</div>
+                <div className="mt-4 pt-4 border-t text-sm font-semibold flex justify-between items-center">
+                    <span>Kontenjan:</span>
+                    <span className={capacityColor}>{capacityLeft} / {event.capacity}</span>
+                </div>
+            </div>
+        </div>
+    );
 };
 const EventsListPage = () => { 
     const [events, setEvents] = useState([]); 
     const [filteredEvents, setFilteredEvents] = useState([]); 
     const [loading, setLoading] = useState(true); 
     const [searchTerm, setSearchTerm] = useState(''); 
-    const [selectedCategory, setSelectedCategory] = useState('Tümü');
+    const [selectedCategory, setSelectedCategory] = useState('');
+    const [selectedAudience, setSelectedAudience] = useState('');
     const query = useQuery();
     const history = useHistory();
     const tagFromQuery = query.get('tag');
@@ -880,16 +899,20 @@ const EventsListPage = () => {
         if (tagFromQuery) {
             result = result.filter(event => event.tags.includes(tagFromQuery));
         }
-        if (selectedCategory !== 'Tümü') { 
+        if (selectedCategory) { 
             result = result.filter(event => event.category === selectedCategory); 
-        } 
+        }
+        if (selectedAudience) {
+            result = result.filter(event => event.targetAudience === selectedAudience);
+        }
         if (searchTerm) { 
             result = result.filter(event => event.name.toLowerCase().includes(searchTerm.toLowerCase())); 
         } 
         setFilteredEvents(result); 
-    }, [searchTerm, selectedCategory, events, tagFromQuery]); 
+    }, [searchTerm, selectedCategory, selectedAudience, events, tagFromQuery]); 
 
-    const categories = ['Tümü', ...new Set(events.map(e => e.category))];
+    const categories = [...new Set(events.map(e => e.category))];
+    const audiences = ['Genel İzleyici', 'Çocuklar', 'Yetişkinler', 'Yaşlılar', 'Ev Hanımları', 'Dezavantajlı Gruplar', 'Öğrenciler'];
     const allTags = [...new Set(events.flatMap(e => e.tags))];
     
     const handleTagFilterChange = (tag) => {
@@ -898,15 +921,37 @@ const EventsListPage = () => {
 
     if (loading) return <div className="flex justify-center items-center h-96"><div className="loader"></div></div>; 
     
-    return (<div className="py-10"><main className="mx-auto max-w-7xl sm:px-6 lg:px-8"><div className="bg-white shadow-lg rounded-lg p-6 sm:p-8"><h1 className="text-3xl font-bold text-gray-900 mb-2">Etkinlikler</h1><p className="text-gray-600 mb-8">Kütüphanemizde düzenlenecek olan etkinlikleri keşfedin ve kaydolun.</p><div className="flex flex-col md:flex-row gap-4 mb-4"><input type="text" placeholder="Etkinlik ara..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="block w-full md:w-1/3 rounded-md border-0 py-2 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-600 sm:text-sm" /><select value={selectedCategory} onChange={e => setSelectedCategory(e.target.value)} className="block w-full md:w-1/4 rounded-md border-0 py-2 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-red-600 sm:text-sm">{categories.map(cat => <option key={cat} value={cat}>{cat}</option>)}</select></div>
-    <div className="mb-8">
-        <div className="flex items-center gap-2 flex-wrap">
-            <span className="text-sm font-medium text-gray-700">Etiketler:</span>
-            {tagFromQuery && <button onClick={() => history.push('/etkinlikler')} className="text-xs font-semibold inline-flex items-center py-1 px-2.5 uppercase rounded-full text-white bg-red-600 hover:bg-red-700">Filtreyi Temizle <XMarkIcon className="w-3 h-3 ml-1.5"/></button>}
-            {allTags.map(tag => <button key={tag} onClick={() => handleTagFilterChange(tag)} className={`text-xs font-semibold py-1 px-2.5 rounded-full transition-colors ${tagFromQuery === tag ? 'bg-purple-600 text-white' : 'bg-purple-100 text-purple-800 hover:bg-purple-200'}`}>{tag}</button>)}
+    return (
+        <div className="py-10">
+            <main className="mx-auto max-w-7xl sm:px-6 lg:px-8">
+                <div className="bg-white shadow-lg rounded-lg p-6 sm:p-8">
+                    <h1 className="text-3xl font-bold text-gray-900 mb-2">Etkinlikler</h1>
+                    <p className="text-gray-600 mb-8">Kütüphanemizde düzenlenecek olan etkinlikleri keşfedin ve kaydolun.</p>
+                    <div className="flex flex-col md:flex-row gap-4 mb-4">
+                        <input type="text" placeholder="Etkinlik ara..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="block w-full md:w-1/3 rounded-md border-0 py-2 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-600 sm:text-sm" />
+                        <select value={selectedCategory} onChange={e => setSelectedCategory(e.target.value)} className="block w-full md:w-1/4 rounded-md border-0 py-2 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-red-600 sm:text-sm">
+                            <option value="" disabled>Etkinlik Kategorisi Seçin</option>
+                            {categories.map(cat => <option key={cat} value={cat}>{cat}</option>)}
+                        </select>
+                        <select value={selectedAudience} onChange={e => setSelectedAudience(e.target.value)} className="block w-full md:w-1/4 rounded-md border-0 py-2 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-red-600 sm:text-sm">
+                            <option value="" disabled>Hedef Kitle Seçin</option>
+                            {audiences.map(aud => <option key={aud} value={aud}>{aud}</option>)}
+                        </select>
+                    </div>
+                    <div className="mb-8">
+                        <div className="flex items-center gap-2 flex-wrap">
+                            <span className="text-sm font-medium text-gray-700">Etiketler:</span>
+                            {tagFromQuery && <button onClick={() => history.push('/etkinlikler')} className="text-xs font-semibold inline-flex items-center py-1 px-2.5 uppercase rounded-full text-white bg-red-600 hover:bg-red-700">Filtreyi Temizle <XMarkIcon className="w-3 h-3 ml-1.5"/></button>}
+                            {allTags.map(tag => <button key={tag} onClick={() => handleTagFilterChange(tag)} className={`text-xs font-semibold py-1 px-2.5 rounded-full transition-colors ${tagFromQuery === tag ? 'bg-purple-600 text-white' : 'bg-purple-100 text-purple-800 hover:bg-purple-200'}`}>{tag}</button>)}
+                        </div>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {filteredEvents.length > 0 ? filteredEvents.map(event => <EventCard key={event.id} event={event} />) : <p className="col-span-full text-center text-gray-500">Arama kriterlerine uygun etkinlik bulunamadı.</p>}
+                    </div>
+                </div>
+            </main>
         </div>
-    </div>
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">{filteredEvents.length > 0 ? filteredEvents.map(event => <EventCard key={event.id} event={event} />) : <p className="col-span-full text-center text-gray-500">Arama kriterlerine uygun etkinlik bulunamadı.</p>}</div></div></main></div>);
+    );
 };
 const EventDetailPage = () => { 
     const { eventId } = useParams(); 
@@ -973,6 +1018,7 @@ const EventDetailPage = () => {
                                 <div className="flex items-center"><CalendarIcon className="w-5 h-5 mr-2" /><span>{new Date(event.date).toLocaleDateString('tr-TR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</span></div>
                                 <div className="flex items-center"><ClockIcon className="w-5 h-5 mr-2" /><span>{new Date(event.date).toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' })}</span></div>
                                 <div className="flex items-center"><LocationMarkerIcon className="w-5 h-5 mr-2" /><span>{event.location}</span></div>
+                                <div className="flex items-center"><UsersIcon className="w-5 h-5 mr-2" /><span>{event.targetAudience}</span></div>
                             </div>
                              <div className="flex flex-wrap gap-2 mt-4">{event.tags.map(tag => <TagBadge key={tag} tag={tag} />)}</div>
                             <p className="text-gray-700 mt-6">{event.description}</p>
