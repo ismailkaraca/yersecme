@@ -1069,7 +1069,7 @@ const DeveloperCredit = () => {
           İsmail Karaca
         </span>
         <span className="text-xs text-gray-600">
-          Frontend Prototype
+Bu Frontend Prototype (Ön Yüz Prototipi) "İsmail Karaca" tarafından geliştirilmiştir.
         </span>
       </div>
     </a>
