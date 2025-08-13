@@ -446,7 +446,7 @@ const Header = () => {
 
     const AppTitle = () => (
         <span className="font-bold text-gray-800 text-xs sm:text-sm lg:text-base">
-            Koha Kütüphane Otomasyon Sistemi Entegrasyonlu Yer Seçme, Rezervasyon ve Etkinlik Yönetimi Sistemi
+        Rezervasyon Sistemi 
         </span>
     );
 
