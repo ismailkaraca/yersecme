@@ -462,7 +462,7 @@ const Header = () => {
                     {isAuthenticated && <a onClick={() => navigateTo('/rezervasyonlarim')} className="text-sm font-semibold leading-6 text-gray-900 cursor-pointer hover:text-red-600">Rezervasyonlarım/Taleplerim</a>}
                     {showBreakButton && <a onClick={openBreakModal} className="text-sm font-semibold leading-6 text-blue-600 cursor-pointer hover:text-blue-800 flex items-center gap-1"><PauseIcon className="w-4 h-4" /> Mola Yönetimi</a>}
                     
-                    <a href="https://kutuphaneveteknoloji.com/yersecmepanel.html" target="_blank" rel="noopener noreferrer" className="bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-semibold py-2 px-4 rounded-lg flex items-center gap-2 transition-colors">
+                    <a href="https://yersecmepanel.vercel.app/" target="_blank" rel="noopener noreferrer" className="bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-semibold py-2 px-4 rounded-lg flex items-center gap-2 transition-colors">
                         Yönetim Paneli <ExternalLinkIcon className="w-4 h-4" />
                     </a>
 
@@ -497,7 +497,7 @@ const Header = () => {
                         <a onClick={() => navigateTo('/etkinlikler')} className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 cursor-pointer">Etkinlik Rezervasyonu</a>
                         {isAuthenticated && <a onClick={() => navigateTo('/rezervasyonlarim')} className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 cursor-pointer">Rezervasyonlarım/Taleplerim</a>}
                         {showBreakButton && <a onClick={handleOpenBreakModal} className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-blue-600 hover:bg-blue-50 cursor-pointer">Mola Yönetimi</a>}
-                        <a href="https://kutuphaneveteknoloji.com/yersecmepanel.html" target="_blank" rel="noopener noreferrer" className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 cursor-pointer">Yönetim Paneli</a>
+                        <a href="https://yersecmepanel.vercel.app/" target="_blank" rel="noopener noreferrer" className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 cursor-pointer">Yönetim Paneli</a>
                     </div><div className="py-6">
                         {isAuthenticated ? (
                              <div className="mb-4">
